@@ -3,18 +3,23 @@ import './App.css'
 import './components/SidePanel.css'
 import SidePanel from './components/SidePanel'
 import TextArea from './components/TextArea'
+import { useState } from 'react'
 
 function App() {
 
+  const [sidePanelOpen, setSidePanelOpen] = useState<boolean>(true)
+
+  const handleClick = () => {
+    setSidePanelOpen(!sidePanelOpen)
+  }
+
   return (
     <div className='main-cont'>
-
-      <div className='sidepanel-cont'>
-        <SidePanel/>
-      </div>
+      <SidePanel isOpen={sidePanelOpen}/>
+      <button onClick={handleClick}>pop</button>
 
       <TextArea/>
-      
+
     </div>
   )
 }

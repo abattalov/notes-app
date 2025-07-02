@@ -1,4 +1,12 @@
-.sidepanel-cont{
+.sidepanel {
+    transform: translateX(-100%);
     background-color: red;
-    width: 25%;
+    transition: transform 0.3s ease;
+    width: 18rem;
+    overflow: hidden;
+}
+
+.sidepanel-open {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in;
 }

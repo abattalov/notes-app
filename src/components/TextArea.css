@@ -1,3 +1,6 @@
 .textarea-cont {
     flex: 1;
+    outline: none;
+    background-color: blue;
+    padding: 1rem;
 }

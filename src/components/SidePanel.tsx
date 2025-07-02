@@ -1,8 +1,14 @@
-export default function SidePanel(){
+import "./SidePanel.css"
+
+export type SidePanelProps = {
+    isOpen: boolean
+}
+
+export default function SidePanel(props: SidePanelProps){
     return (
-        <div>
-            <label>Search</label>
-            <input type="text" />
-        </div>
+            <div className={props.isOpen ? "sidepanel-open" : "sidepanel"}>
+                <label>Search</label>
+                <input type="text" />
+            </div>
     )
 }
