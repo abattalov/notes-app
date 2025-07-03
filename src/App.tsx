@@ -16,9 +16,7 @@ function App() {
   return (
     <div className='main-cont'>
       <SidePanel isOpen={sidePanelOpen}/>
-      <button onClick={handleClick}>pop</button>
-
-      <TextArea/>
+      <TextArea isFullscreen={!sidePanelOpen} toggleSidePanel={handleClick}/>
 
     </div>
   )

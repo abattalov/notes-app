@@ -1,12 +1,13 @@
 .sidepanel {
     transform: translateX(-100%);
-    background-color: red;
-    transition: transform 0.3s ease;
-    width: 18rem;
+    transition: transform 0.3s ease, width 0.3s ease;
+    width: 0;
+    height: 100vh;
     overflow: hidden;
 }
 
 .sidepanel-open {
     transform: translateX(0);
-    transition: transform 0.3s ease-in;
+    transition: transform 0.3s ease, width 0.3s ease;
+    width: 18rem;
 }
