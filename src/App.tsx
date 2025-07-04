@@ -9,14 +9,14 @@ function App() {
 
   const [sidePanelOpen, setSidePanelOpen] = useState<boolean>(true)
 
-  const handleClick = () => {
+  const toggleSidePanel = () => {
     setSidePanelOpen(!sidePanelOpen)
   }
 
   return (
     <div className='main-cont'>
       <SidePanel isOpen={sidePanelOpen}/>
-      <TextArea isFullscreen={!sidePanelOpen} toggleSidePanel={handleClick}/>
+      <TextArea isFullscreen={!sidePanelOpen} toggleSidePanel={toggleSidePanel}/>
 
     </div>
   )
