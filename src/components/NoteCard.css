@@ -1,0 +1,7 @@
+.notecard-cont {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+    background-color: red;
+    border: solid;
+}
