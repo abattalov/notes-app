@@ -3,6 +3,8 @@ import './TextArea.css'
 export type TextAreaProps = {
     isFullscreen: boolean;
     toggleSidePanel: () => void;
+    noteContent: string;
+    onContentChange: (content: string) => void;
 }
 
 export default function TextArea(props: TextAreaProps){
@@ -11,9 +13,10 @@ export default function TextArea(props: TextAreaProps){
             <div className='textarea-header'>
                 <button onClick={props.toggleSidePanel}>X</button>
             </div>
-            <div className={props.isFullscreen ? "textarea-full" : "textarea"} contentEditable="true">
-                
-            </div>
+            <textarea className={props.isFullscreen ? "textarea-full" : "textarea"}
+                value={props.noteContent}
+                onChange={(e) => props.onContentChange(e.target.value)}
+            />
         </div>
     )
 }

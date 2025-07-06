@@ -5,7 +5,8 @@ import type { Note } from './../types';
 import { useEffect, useState } from "react"
 
 export type SidePanelProps = {
-    isOpen: boolean
+    isOpen: boolean;
+    openNote: (id: number) => void;
 }
 
 export default function SidePanel(props: SidePanelProps){
@@ -41,7 +42,7 @@ export default function SidePanel(props: SidePanelProps){
             <div className={props.isOpen ? "sidepanel-open" : "sidepanel"}>
                 <h1>My Notes</h1>
                 <Searchbar/>
-                <NotesList notes={notes}/>
+                <NotesList notes={notes} openNote={props.openNote}/>
             </div>
     )
 }
