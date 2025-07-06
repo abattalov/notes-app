@@ -2,8 +2,8 @@ import './TextArea.css'
 
 export type TextAreaProps = {
     isFullscreen: boolean;
-    toggleSidePanel: () => void;
     noteContent: string;
+    toggleSidePanel: () => void;
     onContentChange: (content: string) => void;
 }
 

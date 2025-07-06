@@ -12,7 +12,7 @@ function App() {
   const [currentNoteId, setCurrentNoteId] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null);
 
-  const saveTimeoutRef = useRef<NodeJS.Timeout>();
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const toggleSidePanel = () => {
     setSidePanelOpen(!sidePanelOpen)
@@ -20,24 +20,26 @@ function App() {
 
   
   const openNote = (id: number) => {
+    
+    if(currentNoteId && noteContent){
+      saveNote(currentNoteId, noteContent)
+    }
+
+    if(saveTimeoutRef.current){
+      clearTimeout(saveTimeoutRef.current)
+    }
+
     setCurrentNoteId(id);
-    console.log('Opening note ID:', id);
 
-      const fetchNote = async () => {
-        try{
-
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`);
-            const data = await response.json();
-            console.log(data)
-            setNoteContent(data.content)
-
-        } catch(error){
-
-            setError(error instanceof Error ? error.message : "Unknown error")
-
-        } finally{
-            console.log('finally... do something')
-        }
+    const fetchNote = async () => {
+      try{
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`);
+          const data = await response.json();
+          console.log(data)
+          setNoteContent(data.content)
+      } catch(error){
+          setError(error instanceof Error ? error.message : "Unknown error")
+      }
     }
 
     fetchNote();
@@ -51,7 +53,6 @@ function App() {
     }
 
     saveTimeoutRef.current = setTimeout(async () => {
-       console.log('Trying to save note ID:', currentNoteId);
       if(currentNoteId){
         await saveNote(currentNoteId, content)
       }
@@ -68,7 +69,7 @@ function App() {
       });
 
     } catch(error){
-
+      setError(error instanceof Error ? error.message : "Unknown error")
     }
   }
 
