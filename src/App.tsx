@@ -12,6 +12,8 @@ function App() {
   const [noteContent, setNoteContent] = useState<string>("")
   const [currentNoteId, setCurrentNoteId] = useState<number | null>(null)
   const [notes, setNotes] = useState<Note[]>([]);
+  const [deleteModal, setDeleteModal] = useState<{isOpen: boolean, noteId: number | null}>({isOpen: false, noteId: null});
+
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,15 +25,11 @@ function App() {
 
   const fetchNotes = async () => {
     try{
-
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`);
         const data = await response.json();
         setNotes(data);
-
     } catch(error){
-
         setError(error instanceof Error ? error.message : "Unknown error")
-
     } finally{
         setLoading(false);
     }
@@ -43,7 +41,6 @@ function App() {
 
   
   const openNote = (id: number) => {
-    
     if(currentNoteId && noteContent){
       saveNote(currentNoteId, noteContent)
     }
@@ -84,7 +81,6 @@ function App() {
 
   const saveNote = async (id: number, content: string) => {
     try{
-
       await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -141,22 +137,53 @@ function App() {
     }
   }
 
+  const openDeleteModal = (noteId: number) => {
+    setDeleteModal({isOpen: true, noteId})
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModal({isOpen: false, noteId: null})
+  };
+
+  const confirmDelete =  async () => {
+    if (deleteModal.noteId){
+      await deleteNote(deleteModal.noteId)
+      closeDeleteModal();
+    }
+
+  }
+
   return (
-    <div className='main-cont'>
-      <SidePanel 
-        notes={notes}
-        isOpen={sidePanelOpen} 
-        openNote={openNote}
-        createNewNote={createNewNote}
-        deleteNote={deleteNote}
-        error={error}
-        loading={loading}/>
-      <TextArea 
-        isFullscreen={!sidePanelOpen} 
-        toggleSidePanel={toggleSidePanel} 
-        noteContent={noteContent} 
-        onContentChange={handleContentChange}/>
-    </div>
+    <>
+      <div className='main-cont'>
+        <SidePanel 
+          notes={notes}
+          isOpen={sidePanelOpen} 
+          openNote={openNote}
+          createNewNote={createNewNote}
+          deleteNote={openDeleteModal}
+          error={error}
+          loading={loading}/>
+        <TextArea 
+          isFullscreen={!sidePanelOpen} 
+          toggleSidePanel={toggleSidePanel} 
+          noteContent={noteContent} 
+          onContentChange={handleContentChange}/>
+      </div>
+      {deleteModal.isOpen && (
+        <div className="modal-overlay" onClick={closeDeleteModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Delete Note</h3>
+            <p>Are you sure you want to delete this note? This action cannot be undone.</p>
+            <div className="modal-buttons">
+              <button onClick={confirmDelete} className="delete-btn">Delete</button>
+              <button onClick={closeDeleteModal}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+    
   )
 }
 
