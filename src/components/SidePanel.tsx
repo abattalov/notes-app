@@ -9,6 +9,7 @@ export type SidePanelProps = {
     error: string | null;
     loading: boolean;
     openNote: (id: number) => void;
+    deleteNote: (id: number) => void;
     createNewNote: () => void;
 }
 
@@ -22,7 +23,7 @@ export default function SidePanel(props: SidePanelProps){
                 <h1>My Notes</h1>
                 <Searchbar/>
                 <button onClick={props.createNewNote}>+</button>
-                <NotesList notes={props.notes} openNote={props.openNote}/>
+                <NotesList notes={props.notes} openNote={props.openNote} deleteNote={props.deleteNote}/>
             </div>
     )
 }

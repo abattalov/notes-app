@@ -123,13 +123,34 @@ function App() {
     }
   }
 
+  const deleteNote = async (id: number) => {
+    try{
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"}
+      })
+
+      if(!response.ok){
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      await fetchNotes();
+
+    } catch(error){
+      setError(error instanceof Error ? error.message : "Unkown error");
+    }
+  }
+
   return (
     <div className='main-cont'>
       <SidePanel 
         notes={notes}
         isOpen={sidePanelOpen} 
         openNote={openNote}
-        createNewNote={createNewNote}/>
+        createNewNote={createNewNote}
+        deleteNote={deleteNote}
+        error={error}
+        loading={loading}/>
       <TextArea 
         isFullscreen={!sidePanelOpen} 
         toggleSidePanel={toggleSidePanel} 
