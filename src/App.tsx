@@ -170,6 +170,7 @@ function App() {
           noteContent={noteContent} 
           onContentChange={handleContentChange}/>
       </div>
+      
       {deleteModal.isOpen && (
         <div className="modal-overlay" onClick={closeDeleteModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
