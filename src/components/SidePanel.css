@@ -9,5 +9,8 @@
 .sidepanel-open {
     transform: translateX(0);
     transition: transform 0.3s ease, width 0.3s ease;
+    height: 100vh;
     width: 18rem;
+    overflow: auto;
+
 }
