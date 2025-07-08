@@ -3,7 +3,7 @@ import './App.css'
 import './components/SidePanel.css'
 import SidePanel from './components/SidePanel'
 import TextArea from './components/TextArea'
-import type { Note } from './types'
+import type { NoteListItem } from './types'
 import { useState, useCallback, useRef, useEffect } from 'react'
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   const [sidePanelOpen, setSidePanelOpen] = useState<boolean>(true)
   const [noteContent, setNoteContent] = useState<string>("")
   const [currentNoteId, setCurrentNoteId] = useState<number | null>(null)
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<NoteListItem[]>([]);
   const [deleteModal, setDeleteModal] = useState<{isOpen: boolean, noteId: number | null}>({isOpen: false, noteId: null});
 
   const [loading, setLoading] = useState<boolean>(true);

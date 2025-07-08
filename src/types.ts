@@ -7,3 +7,13 @@ export type Note = {
     updated_at: string;
     is_archived: boolean;
 }
+
+export type NoteListItem = {
+    id: number;
+    title: string;
+    short_description: string;
+    tags: string[];
+    created_at: string;
+    updated_at: string;
+    is_archived: boolean;
+}

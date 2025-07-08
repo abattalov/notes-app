@@ -11,7 +11,7 @@ export default function TextArea(props: TextAreaProps){
     return(
         <div className={`textarea-cont ${props.isFullscreen ? "sidepanel-open" : ""}`}>
             <div className='textarea-header'>
-                <button onClick={props.toggleSidePanel}>X</button>
+                <button onClick={props.toggleSidePanel}>{props.isFullscreen ? ">" : "<"}</button>
             </div>
             <textarea className={props.isFullscreen ? "textarea-full" : "textarea"}
                 value={props.noteContent}

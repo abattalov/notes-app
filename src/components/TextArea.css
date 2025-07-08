@@ -16,13 +16,14 @@
 .textarea {
     flex: 1;
     outline: none;
-    background-color: blue;
+    background-color: #0E0004;
     padding: 1rem;
+    color: rgb(0, 255, 0);
 }
 
 .textarea-full {
     flex: 1;
     outline: none;
-    background-color: blueviolet;
+    background-color: #0E0004;
     padding: 1rem;
 }

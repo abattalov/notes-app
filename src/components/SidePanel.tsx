@@ -1,10 +1,10 @@
 import NotesList from "./NoteList"
 import Searchbar from "./Searchbar"
 import "./SidePanel.css"
-import type { Note } from './../types';
+import type { NoteListItem } from './../types';
 
 export type SidePanelProps = {
-    notes: Note[];
+    notes: NoteListItem[];
     isOpen: boolean;
     error: string | null;
     loading: boolean;

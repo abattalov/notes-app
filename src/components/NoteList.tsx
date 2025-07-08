@@ -1,8 +1,9 @@
 import NoteCard from "./NoteCard";
-import type { Note } from "./../types";
+import type { NoteListItem } from "./../types";
+import './ NoteList.css'
 
 type NoteListProps = {
-    notes: Note[];
+    notes: NoteListItem[];
     openNote: (id: number) => void;
     deleteNote: (id: number) => void;
 } 
