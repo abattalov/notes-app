@@ -41,9 +41,10 @@ function App() {
 
   
   const openNote = (id: number) => {
-    if(currentNoteId && noteContent){
-      saveNote(currentNoteId, noteContent)
-    }
+    // Commenting this out for now... might not need to save on each switch, timeout should handle it.
+    // if(currentNoteId && noteContent){
+    //   saveNote(currentNoteId, noteContent)
+    // }
 
     if(saveTimeoutRef.current){
       clearTimeout(saveTimeoutRef.current)
@@ -76,7 +77,7 @@ function App() {
       if(currentNoteId){
         await saveNote(currentNoteId, content)
       }
-    }, (3000))
+    }, (1000))
   }, [currentNoteId]);
 
   const saveNote = async (id: number, content: string) => {

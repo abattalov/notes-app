@@ -16,9 +16,9 @@
 .textarea {
     flex: 1;
     outline: none;
-    background-color: #0E0004;
+    background-color: #09131B;
     padding: 1rem;
-    color: rgb(0, 255, 0);
+    color: #72AC5C;
 }
 
 .textarea-full {
